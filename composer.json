@@ -1,0 +1,34 @@
+{
+  "name": "fjerbi/forum-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony ForumBundle",
+  "keywords": [
+    "Symfony Blog Blogger BlogManagement"
+  ],
+  "homepage": "https://github.com/fjerbi/blog-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Firas JERBI",
+      "email": "firas.jerbi.engineer@gmail.com",
+      "homepage": "https://fjerbi.github.io"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "erusev/parsedown": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "fjerbi\\ForumBundle\\": ""
+    },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "fjerbi\\ForumBundle\\Tests\\": "/Tests/"
+    }
+  }
+}

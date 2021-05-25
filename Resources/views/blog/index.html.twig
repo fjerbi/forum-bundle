@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog Bundle | Home Blog</title>
+    <link href="https://blogbundle.000webhostapp.com/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://blogbundle.000webhostapp.com/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://blogbundle.000webhostapp.com/css/animate.min.css" rel="stylesheet">
+    <link href="https://blogbundle.000webhostapp.com/css/lightbox.css" rel="stylesheet">
+    <link href="https://blogbundle.000webhostapp.com/css/main.css" rel="stylesheet">
+    <link href="https://blogbundle.000webhostapp.com/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="https://blogbundle.000webhostapp.com/js/html5shiv.js"></script>
+    <script src="https://blogbundle.000webhostapp.com/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blogbundle.000webhostapp.com/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://blogbundle.000webhostapp.com/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="hhttps://blogbundle.000webhostapp.com/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="https://blogbundle.000webhostapp.com/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+<header id="header">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+    <div class="navbar navbar-inverse" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="#">
+                    <h1>Blog</h1>
+                </a>
+
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ asset('/') }}">Accueil</a></li>
+
+
+                    </li>
+
+
+
+                </ul>
+            </div>
+            <div class="search">
+                <form method="POST">
+                    <i class="fa fa-search"></i>
+                    <div class="field-toggle">
+                    <input type="text" class="search-form" name="search" id="search" autocomplete="off" placeholder="Chercher une publication">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<!--/#header-->
+
+<section id="page-breadcrumb">
+    <div class="vertical-center sun">
+        <div class="container">
+            <div class="row">
+                <div class="action">
+                    <div class="col-sm-12">
+                        <h1 class="title">Blog</h1>
+                        <p>Accueil</p>
+                        <div class="search">
+                            <form method="POST">
+
+                                    <input type="text" class="search-form" name="search" id="search" autocomplete="off" placeholder="Chercher une publication">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#page-breadcrumb-->
+
+<section id="blog" class="padding-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-7">
+                <div class="row">
+
+                    {% for post in posts %}
+                    <div class="col-sm-12 col-md-12">
+                        <div class="single-blog single-column">
+                            <div class="post-thumb">
+                                <a href="{{ path('blog_post',{id: post.id, slug: post.slug}) }}"><img src="https://blogbundle.000webhostapp.com/images/blog/8.jpg" class="img-responsive" alt=""></a>
+                                <div class="post-overlay">
+                                    <span class="uppercase"><a href="#"><br><small>{{ post.created | date("F j, Y") }} </small></a></span>
+                                </div>
+                            </div>
+                            <div class="post-content overflow">
+                                <h2 class="post-title bold"><a href="{{ path('blog_post',{id: post.id, slug: post.slug}) }}">{{ post.title }}</a></h2>
+                                <h3 class="post-author"><a href="#">Publié par {{ post.author.username }}</a></h3>
+                                <h3 class="post-author"><a href="#">Publié le  {{ post.created | date("F j, Y") }}</a></h3>
+
+                                <p>{{ post.content | markdown}}</p>
+                                {% for tag in post.tags %}
+                                <a href="{{ path('blog_post',{id: post.id, slug: post.slug}) }}" class="read-more">Voir plus</a>
+
+                                <div class="post-bottom overflow">
+                                    <ul class="nav navbar-nav post-nav">
+                                        <li><a href="#"><i class="fa fa-tag"></i> Tags: {{ tag.name }}</a></li>
+                                    </ul>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="blog-pagination">
+                    <ul class="pagination">
+                        <p>Pagination, coming soon ...</p>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--/#blog-->
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center bottom-separator">
+                <img src="https://blogbundle.000webhostapp.com/images/home/under.png" class="img-responsive inline" alt="">
+            </div>
+
+            <div class="col-sm-12">
+                <div class="copyright-text text-center">
+                    <p>&copy; Firas Jerbi 2021. All Rights Reserved.</p>
+                    <p>Blog Bundle developed by <a target="_blank" href="https://fjerbi.github.io">Firas Jerbi</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--/#footer-->
+
+<script type="text/javascript" src="https://blogbundle.000webhostapp.com/js/jquery.js"></script>
+<script type="text/javascript" src="https://blogbundle.000webhostapp.com/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://blogbundle.000webhostapp.com/js/lightbox.min.js"></script>
+<script type="text/javascript" src="https://blogbundle.000webhostapp.com/js/wow.min.js"></script>
+<script type="text/javascript" src="https://blogbundle.000webhostapp.com/js/main.js"></script>
+</body>
+</html>

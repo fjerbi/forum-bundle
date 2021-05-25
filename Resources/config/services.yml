@@ -1,0 +1,20 @@
+services:
+  fjerbi\ForumBundle\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Tests}'
+
+  fjerbi\ForumBundle\Controller\:
+    resource: '../../Controller'
+    tags: ['controller.service_arguments']
+
+  fjerbi\ForumBundle\EventSubscriber\ViewSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+    arguments:
+      ['@Doctrine\ORM\EntityManagerInterface']
+
+  fjerbi\ForumBundle\Twig\ForumExtension:
+    tags: ['twig.extension']
+
+  fjerbi\ForumBundle\Twig\ForumRuntime:
+    tags: ['twig.runtime']
