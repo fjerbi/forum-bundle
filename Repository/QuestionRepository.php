@@ -35,5 +35,29 @@ class QuestionRepository extends EntityRepository
         ->setParameter('motcle',$motcle.'%');
     return $query->getResult();
 }
-
+    public function FindAnsweredQuestions(){
+        $query=$this->getEntityManager()
+            ->createQuery("
+            select e from fjerbi\ForumBundle\Entity\Question e
+            where e.solved=true");
+        return $query->getResult();
+    }
+    public function FindunAnsweredQuestions(){
+        $query=$this->getEntityManager()
+            ->createQuery("
+            select e from fjerbi\ForumBundle\Entity\Question e
+            where e.solved=false");
+        return $query->getResult();
+    }
+    public function findQuestionByid($id)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                "SELECT a
+       FROM fjerbi\ForumBundle\Entity\Question
+       a WHERE a.id = :id"
+            )
+            ->setParameter('id', $id)
+            ->getOneOrNullResult();
+    }
 }

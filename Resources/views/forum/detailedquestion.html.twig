@@ -50,10 +50,6 @@
                     <li><a href="{{ path('forum') }}">Home</a></li>
                     <li><a href="{{ path('forum_solved_questions') }}">Solved</a></li>
                     <li><a href="{{ path('forum_unsolved_questions') }}">Unsolved</a></li>
-                    </li>
-
-
-
                 </ul>
             </div>
             <div class="search">
@@ -69,110 +65,111 @@
 </header>
 <!--/#header-->
 
+
 <section id="page-breadcrumb">
     <div class="vertical-center sun">
         <div class="container">
             <div class="row">
                 <div class="action">
                     <div class="col-sm-12">
-                        <h1 class="title">Forum</h1>
-                        <p>Home</p>
-                        <div class="search">
-                            <form method="POST">
-
-                                <input type="text" class="search-form" name="search" id="search" autocomplete="off" placeholder="Search a question">
-
-                            </form>
-                        </div>
+                        <h1 class="title">Question Details</h1>
+                        <p>{{ title }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--/#page-breadcrumb-->
 
-<section id="blog" class="padding-top">
+<section id="blog-details" class="padding-top">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-5">
-                <div class="sidebar blog-sidebar">
-                    <div class="sidebar-item  recent">
-                        <h3>Comments</h3>
-                        {% for comments in comments %}
-                        <div class="media">
-                            <div class="media-body">
-                                <h4><a href="{{ path('detailed_question',{'id':comments.question.id}) }}">{{ comments.comment }}</a></h4>
-                                <p>posted to {{ comments.question.title }}</p>
-                            </div>
-                        </div>
-                         {% endfor %}
-
-                    </div>
-                    <div class="sidebar-item categories">
-                        <h3>Categories</h3>
-                        <ul class="nav navbar-stacked">
-                            {% for categories in categories %}
-                            <li><a href="#">{{ categories.name }}<span class="pull-right">(1)</span></a></li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-
-                    <div class="sidebar-item popular">
-                        <h3>Latest Qustions</h3>
-                        <ul class="gallery">
-                            {% for questions in questions %}
-                            <li><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></li>
-                            {% endfor %}
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-9 col-sm-7">
                 <div class="row">
-                    {% for questions in questions %}
                     <div class="col-md-12 col-sm-12">
-                        <div class="single-blog two-column">
+                        <div class="single-blog blog-details two-column">
                             <div class="post-thumb">
+                                <a href="#"><img src="images/blog/7.jpg" class="img-responsive" alt=""></a>
                                 <div class="post-overlay">
                                     <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
                                 </div>
                             </div>
                             <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></h2>
-                                <h3 class="post-author"><a href="#">Posted by {{ questions.creator.username }}</a></h3>
-                                <p>{{ questions.body | slice(0,50) }} ..</p>
-                                <a href="#" class="read-more">View More</a>
+                                <h2 class="post-title bold"><a href="#">{{ title }}</a></h2>
+                                <h3 class="post-author"><a href="#">Posted by {{ creator.username }}</a></h3>
+                                <p>{{ body}} </p>
                                 <div class="post-bottom overflow">
                                     <ul class="nav navbar-nav post-nav">
-                                         <li><a href="#"> {{ questions.category.name }}</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                                        <li><a href="#">{{ category.name }}</a></li>
+
                                     </ul>
                                 </div>
+                                <div class="blog-share">
+                                    <span class='st_facebook_hcount'></span>
+                                    <span class='st_twitter_hcount'></span>
+                                    <span class='st_linkedin_hcount'></span>
+                                    <span class='st_pinterest_hcount'></span>
+                                    <span class='st_email_hcount'></span>
+                                </div>
+                                <div class="author-profile padding">
+                                    <div class="row">
+
+                                        <div class="col-sm-10">
+
+                                            <h5 class="card-header">Leave a Comment:</h5>
+                                            <div class="card-body">
+                                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                <form action="{{ path('comment_question') }}" method="post" id="comment">
+
+
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" name="comment" placeholder="Write your answer here..." rows="3"></textarea><br>
+                                                        <input type="hidden"  name="question_id" value="{{ questions.getId() }}">
+                                                        <button  class="btn btn-submit" type="submit">Comment</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                                            <div class="alert alert-danger" role="alert">
+                                                You need to be signed in in order to post a comment Sign in Or
+                                             Register
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+
+
+                                        <!-- Single Comment -->
+                                        {% for comment in questions.comments %}
+                                            <div class="thumb-list">
+                                                <figure><img alt="" src=""></figure>
+                                                <div class="text-holder">
+
+                                                    <h6><strong>{{comment.getUser().getUsername()}}</strong>  <p> {{ comment.getComment() }}</p></h6>
+                                                    <time class="post-date" datetime="2008-02-14 20:00">{{ comment.getCreatedAt()|date }}</time>
+
+
+
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-             {% endfor %}
                 </div>
-                <div class="blog-pagination">
-                    <ul class="pagination">
-                        <li><a href="#">left</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li class="active"><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">6</a></li>
-                        <li><a href="#">7</a></li>
-                        <li><a href="#">8</a></li>
-                        <li><a href="#">9</a></li>
-                        <li><a href="#">right</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </section>
 
 <footer id="footer">

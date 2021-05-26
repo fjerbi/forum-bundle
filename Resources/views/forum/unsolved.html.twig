@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Forum Bundle | Home Forum</title>
+    <title>Forum Bundle | Unsolved Questions</title>
     <link href="https://blogbundle.000webhostapp.com/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://blogbundle.000webhostapp.com/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://blogbundle.000webhostapp.com/css/animate.min.css" rel="stylesheet">
@@ -76,7 +76,7 @@
                 <div class="action">
                     <div class="col-sm-12">
                         <h1 class="title">Forum</h1>
-                        <p>Home</p>
+                        <p>Unsolved Questions</p>
                         <div class="search">
                             <form method="POST">
 
@@ -100,21 +100,21 @@
                     <div class="sidebar-item  recent">
                         <h3>Comments</h3>
                         {% for comments in comments %}
-                        <div class="media">
-                            <div class="media-body">
-                                <h4><a href="{{ path('detailed_question',{'id':comments.question.id}) }}">{{ comments.comment }}</a></h4>
-                                <p>posted to {{ comments.question.title }}</p>
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4><a href="{{ path('detailed_question',{'id':comments.question.id}) }}">{{ comments.comment }}</a></h4>
+                                    <p>posted to {{ comments.question.title }}</p>
+                                </div>
                             </div>
-                        </div>
-                         {% endfor %}
+                        {% endfor %}
 
                     </div>
                     <div class="sidebar-item categories">
                         <h3>Categories</h3>
                         <ul class="nav navbar-stacked">
                             {% for categories in categories %}
-                            <li><a href="#">{{ categories.name }}<span class="pull-right">(1)</span></a></li>
-                        {% endfor %}
+                                <li><a href="#">{{ categories.name }}<span class="pull-right">(1)</span></a></li>
+                            {% endfor %}
                         </ul>
                     </div>
 
@@ -122,7 +122,7 @@
                         <h3>Latest Qustions</h3>
                         <ul class="gallery">
                             {% for questions in questions %}
-                            <li><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></li>
+                                <li><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></li>
                             {% endfor %}
 
                         </ul>
@@ -132,28 +132,28 @@
             <div class="col-md-9 col-sm-7">
                 <div class="row">
                     {% for questions in questions %}
-                    <div class="col-md-12 col-sm-12">
-                        <div class="single-blog two-column">
-                            <div class="post-thumb">
-                                <div class="post-overlay">
-                                    <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="single-blog two-column">
+                                <div class="post-thumb">
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="#">14 <br><small>Feb</small></a></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="post-content overflow">
-                                <h2 class="post-title bold"><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></h2>
-                                <h3 class="post-author"><a href="#">Posted by {{ questions.creator.username }}</a></h3>
-                                <p>{{ questions.body | slice(0,50) }} ..</p>
-                                <a href="#" class="read-more">View More</a>
-                                <div class="post-bottom overflow">
-                                    <ul class="nav navbar-nav post-nav">
-                                         <li><a href="#"> {{ questions.category.name }}</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
-                                    </ul>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="{{ path('detailed_question',{'id':questions.id}) }}">{{ questions.title }}</a></h2>
+                                    <h3 class="post-author"><a href="#">Posted by {{ questions.creator.username }}</a></h3>
+                                    <p>{{ questions.body | slice(0,50) }} ..</p>
+                                    <a href="#" class="read-more">View More</a>
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav navbar-nav post-nav">
+                                            <li><a href="#"> {{ questions.category.name }}</a></li>
+                                            <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-             {% endfor %}
+                    {% endfor %}
                 </div>
                 <div class="blog-pagination">
                     <ul class="pagination">
